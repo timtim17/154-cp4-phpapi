@@ -1,47 +1,61 @@
-# *FILL IN NAME* API Documentation
-*Fill in a short description here about the API's purpose.*
+# MessageBoard API Documentation
 
-## *Fill in Endpoint 1 Title*
-**Request Format:** *Fill in example request format*
+The message board API keeps track of messages posted to it. A message board is a collection of short
+strings. A user can GET all of the messages on the board, or POST one to it if they have the proper
+authentication.
+
+## [GET] /messageboard.php
+**Request Format:** /messageboard.php
 
 **Request Type:** GET
 
 **Returned Data Format**: JSON
 
-**Description:** *Fill in description*
+**Description:**
+Responds with an array of every message on the message board. If there are no messages, an empty
+array is sent back. There are no required parameters.
 
-
-**Example Request:** *Fill in example request*
+**Example Request:** /messageboard.php
 
 **Example Response:**
-*Fill in example response in the {}*
+```json
+[
+    "Mowgli <3 Debug Duck",
+    "CSE 154 is awesome!"
+]
+```
 
+**Error Handling:**
+None
+
+## [POST] /messageboard.php
+**Request Format:** /messageboard.php
+
+**Request Type**: POST
+
+**Returned Data Format**: JSON
+
+**Description:**
+Takes a message via POST and adds it to the message board. Parameters must be sent within the body
+of the request as form-data. Requires authentication: a valid API key/password must be provided
+within the `auth` parameter.
+
+**Example Request:** /messageboard.php
+
+**Request Body: form-data**
+
+| Parameter Name | Value                 |
+|----------------|-----------------------|
+| message        | Mowgli loves CSE 154! |
+| auth           | mowgli_dash           |
+
+**Example Response:**
 ```json
 {
-
+    "status": 200
 }
 ```
 
 **Error Handling:**
-*Fill in any error handling*
-
-## *Fill in Endpoint 2 Title*
-**Request Format:** *Fill in example request format*
-
-**Request Type**: POST
-
-**Returned Data Format**: Plain Text
-
-**Description:** *Fill in description*
-
-**Example Request:** *Fill in example request*
-
-**Example Response:**
-*Fill in example response in the ticks*
-
-```
-
-```
-
-**Error Handling:**
-*Fill in any error handling*
+Responds with HTTP 400 if the auth key is incorrect, if the message is too short, or if either of
+those parameters are missing.
