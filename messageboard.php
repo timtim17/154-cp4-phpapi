@@ -10,9 +10,16 @@
     header("Content-Type: application/json");
 
     $AUTH_KEY = "mowgli_dash";
+    $FILE_NAME = "messages.json";
+
+    if (!file_exists($FILE_NAME)) {
+        file_put_contents($FILE_NAME, "[]");
+    }
+
+    $messages = json_decode(file_get_contents($FILE_NAME));
     
     if ($_SERVER['REQUEST_METHOD'] === "GET") {
-        echo "{\"resp\": \"GET!\"}";
+        echo json_encode($messages);
     } else if ($_SERVER['REQUEST_METHOD'] === "POST") {
         /* Fake auth: in a real scenario this would be some sort of authentication, probably
         based on API key. For simplicity's sake this is just going to be a fake key or
@@ -22,7 +29,9 @@
                 if (isset($_POST["message"])) {
                     $msg = $_POST["message"];
                     if (strlen($msg) > 0) {
-                        echo "{\"status\": 200}";
+                        array_push($messages, $msg);
+                        file_put_contents($FILE_NAME, json_encode($messages));
+                        echo json_encode(array("status" => 200));
                     } else {
                         error("Invalid parameter message: Message too short.");
                     }
@@ -43,7 +52,7 @@
     /**
      * Responds with an error message and HTTP 400 error code. Kills the rest of the program.
      */
-    function error($msg) {
+    function error($msg="Unknown error.") {
         http_response_code(400);
         header("Content-Type: text/plain");
         die($msg);
