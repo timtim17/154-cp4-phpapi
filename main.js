@@ -45,7 +45,8 @@
      * DOM node.
      *
      * @param {string} message - The message to add
-     * @param {number} [delay=2000] - An optional delay in ms for the element to animate in
+     * @param {number} [delay=2000] - An optional delay in ms for the element to animate in; by
+     *                                  default the messages animate in after a 2 second delay
      */
     function addMessage(message, delay=2000) {
         let ele = document.createElement("section");
