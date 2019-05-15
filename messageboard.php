@@ -5,6 +5,40 @@
      * @since 05/14/2019
      * Basic PHP backend server code. Handles file I/O to persist messages to disk. Responds to GET
      * requests with a list of all messages, and POST requests by saving the given message.
+     * 
+     * Web Service Details:
+     * ============================================================================================
+     * GET /messageboard.php
+     *  Required Parameters:
+     *      - None
+     *  Output Format: JSON
+     *  Output Details:
+     *      - Responds with a list of all the messages on the board.
+     * GET /messageboard.php?index=#
+     *  Required Parameters:
+     *      - index=a valid message index (0 <= index < count(messages))
+     *  Output Format: JSON
+     *  Output Details:
+     *      - Responds with a JSON object containing the requested message at the key "message"
+     *      - Responds with HTTP 400 if the index is out of bounds.
+     *          - Can result in unexpected behavior if the index is non-numeric
+     * POST /messageboard.php
+     *  Required Parameters:
+     *      Form Data:
+     *          - auth=A valid API "auth key" - in this case always "mowgli_dash"
+     *          - message=The message to add
+     *              - There is minimal validation on this parameter. THere is a check that it
+     *                  contains something (length > 0), but no checking for whether it is bad
+     *                  i.e. malicious content.
+     *              - Future work could include logging the author of a message or requiring
+     *                  logging in/a unique auth key per user, as well as the ability to DELETE
+     *  Output Format: JSON
+     *  Output Details:
+     *      - Responds with a JSON object containing a status code signifying the operation
+     *          completed successfully ("status"), as well as the index at which it was added
+     *          ("index") - useful for the ?index=# GET endpoint.
+     *      - Responds with HTTP 400 if the auth key is incorrect or missing, or if the message
+     *          is too short (length < 1) or is missing.
      */
 
     header("Content-Type: application/json");
