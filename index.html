@@ -16,13 +16,58 @@
     </head>
 
     <body>
-        <main>
-            <h1>CP4 Message Board</h1>
-            <!-- messages added dynamically by js -->
-        </main>
+        <header>
+                <h1>CP4 Message Board</h1>
+        </header>
 
-        <section>
+        <main><!-- messages added dynamically by js --></main>
+
+        <section id="api-docs">
             <h2>API Doc</h2>
+
+            <section>
+                <h3><span class="ajax-type ajax-get">GET</span> /messageboard.php</h3>
+                <strong>Response Type:</strong> JSON
+                <p>
+                    Responds with an array of every message on the message board. If there are no
+                    messages, an empty array is sent back.
+                </p>
+                <strong>Required Parameters:</strong> None
+                <h4>Example Request</h4>
+                <pre>GET /messageboard.php</pre>
+                <hr>
+                <code><pre>
+[
+    "Mowgli &lt;3 Debug Duck",
+    "CSE 154 is awesome!"
+]</pre></code><!-- break indentation for pre-formatted block -->
+            </section>
+
+            <section>
+                <h3><span class="ajax-type ajax-post">POST</span> /messageboard.php</h3>
+                <strong>Response Type:</strong> JSON
+                <p>
+                        Takes a message via POST and adds it to the message board. Parameters must
+                        be sent within the body of the request as form-data. Requires
+                        authentication: a valid API key/password must be provided within the
+                        <span class="code">auth</span> parameter.
+                </p>
+                <strong>Required Parameters:</strong> None
+                <h4>Example Request</h4>
+                <pre>POST /messageboard.php</pre>
+                <hr>
+                <code><pre>
+[
+    "Mowgli &lt;3 Debug Duck",
+    "CSE 154 is awesome!"
+]</pre></code>
+            </section>
         </section>
+
+        <footer>
+            <p>Portions of this page &copy; 2019 Austin Jenchi</p>
+            <p>Other attributions cited in page source</p>
+            <p>Messages are user generated, no responsibility is taken for their contents.</p>
+        </footer>
     </body>
 </html>
