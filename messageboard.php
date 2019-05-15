@@ -2,7 +2,7 @@
     /**
      * @author Austin Jenchi
      * CSE 154 19sp AQ
-     * @date 05/14/2019
+     * @since 05/14/2019
      * Basic PHP backend server code. Handles file I/O to persist messages to disk. Responds to GET
      * requests with a list of all messages, and POSt requests by saving the given message.
      */
@@ -61,6 +61,8 @@
 
     /**
      * Responds with an error message and HTTP 400 error code. Kills the rest of the program.
+     *
+     * @param string $msg an optional string to output stating what the error is
      */
     function error($msg="Unknown error.") {
         http_response_code(400);
