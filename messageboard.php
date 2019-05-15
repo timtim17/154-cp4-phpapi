@@ -4,7 +4,7 @@
      * CSE 154 19sp AQ
      * @since 05/14/2019
      * Basic PHP backend server code. Handles file I/O to persist messages to disk. Responds to GET
-     * requests with a list of all messages, and POSt requests by saving the given message.
+     * requests with a list of all messages, and POST requests by saving the given message.
      */
 
     header("Content-Type: application/json");
