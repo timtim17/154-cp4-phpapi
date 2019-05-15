@@ -29,7 +29,6 @@
         } else {
             echo json_encode($messages);
         }
-
     } else if ($_SERVER['REQUEST_METHOD'] === "POST") {
         /* Fake auth: in a real scenario this would be some sort of authentication, probably
         based on API key. For simplicity's sake this is just going to be a fake key or
@@ -54,7 +53,6 @@
         } else {
             error("Missing parameter auth: Please provide your auth key.");
         }
-        
     } else {
         error("Invalid request method: Please use either GET or POST with the correct parameters.");
     }
