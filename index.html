@@ -34,13 +34,12 @@
                 </p>
                 <strong>Required Parameters:</strong> None
                 <h4>Example Request</h4>
-                <pre>GET /messageboard.php</pre>
-                <hr>
-                <code><pre>
-[
+                <pre><code>GET /messageboard.php</code></pre>
+                <h4>Example Response</h4>
+<pre><code>[
     "Mowgli &lt;3 Debug Duck",
     "CSE 154 is awesome!"
-]</pre></code><!-- break indentation for pre-formatted block -->
+]</code></pre><!-- break indentation for pre-formatted block -->
             </section>
 
             <section>
@@ -52,15 +51,32 @@
                         authentication: a valid API key/password must be provided within the
                         <span class="code">auth</span> parameter.
                 </p>
-                <strong>Required Parameters:</strong> None
+                <strong>Required Parameters:</strong> Form Data
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Parameter Name</td>
+                            <td>Value</td>
+                        </tr>
+                    </thead>
+                    
+                    <tr>
+                        <td>message</td>
+                        <td>Mowgli loves CSE 154!</td>
+                    </tr>
+
+                    <tr>
+                        <td>auth</td>
+                        <td>mowgli_dash</td>
+                    </tr>
+                </table>
                 <h4>Example Request</h4>
-                <pre>POST /messageboard.php</pre>
-                <hr>
-                <code><pre>
-[
-    "Mowgli &lt;3 Debug Duck",
-    "CSE 154 is awesome!"
-]</pre></code>
+                <pre><code>POST /messageboard.php</code></pre>
+                <p>(with above form data)</p>
+                <h4>Example Response</h4>
+<pre><code>{
+    "status": 200
+}</code></pre>
             </section>
         </section>
 

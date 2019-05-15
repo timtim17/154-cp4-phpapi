@@ -3,7 +3,8 @@
     CSE 154 19sp AQ
     05/14/2019
     Styles for the message board. Sets the background of the board using images and adds some other
-    decorative elements. Adds styles to make elements look like paper with pushpins.
+    decorative elements. Adds styles to make elements look like paper with pushpins. Has CSS
+    animations triggered by Javascript on page load using the animate class.
 */
 @import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Kodchasan|Source+Code+Pro');
 
@@ -14,60 +15,84 @@ body {
     margin: 0;
 }
 
-header, section, footer {
-    margin: 8px auto;
-    padding: 8px;
-}
-
-header, footer {
-    text-align: center;
-}
-
-header, #api-docs {
+header, footer, #api-docs {
     background-color: #ffffff;
     border-radius: 4px;
     /* box-shadow based on Google's Material Web Components Cards
        https://material.io/develop/web/components/cards/ */
     box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14),
         0 1px 3px 0 rgba(0,0,0,.12);
+    margin: 8px auto;
+    opacity: 0;
+    padding: 8px;
+    transition: transform 2s ease, opacity 2s ease;
+}
+
+header.animate, footer.animate, #api-docs.animate {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+header, footer {
+    text-align: center;
 }
 
 header {
+    transform: translateY(-100vh);
     width: 40vw;
+}
+
+footer, #api-docs {
+    transform: translateY(100vh);
+    width: 80vw;
+}
+
+h2 {
+    font-size: 2em;
 }
 
 main {
     height: 75vh;
 }
 
-section, footer {
-    width: 80vw;
+table {
+    border-collapse: collapse;
 }
 
-hr {
-    border: dashed 0.01em #333333;
-    margin: 10px 0;
-    width: 300px;
+thead tr td {
+    border-bottom: 2px solid black;
+}
+
+td:first-child {
+    border-right: 2px solid black;
 }
 
 pre, .code {
-    background: #bbbbbb;
+    background: #e0e0e0;
     border: solid 1px #999999;
     border-radius: 4px;
-    color: #ff0000;
+    color: #ad0000;
     font-family: "Source Code Pro", monospace;
     padding: 4px;
     width: 40vw;
 }
 
-footer {
-    background-color: #123456;
-    border-radius: 10px 10px 0 0;
-    color: white;
-    margin-bottom: 0;
-}
-
 .code {
     padding: 2px;
     margin: 0;
+}
+
+.ajax-type {
+    border-radius: 2px;
+    padding: 0 2px;
+}
+
+.ajax-get {
+    background-color: orange;
+    color: #000000;
+}
+
+.ajax-post {
+    background-color: green;
+    color: #eeeeee;
 }
