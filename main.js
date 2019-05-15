@@ -8,7 +8,9 @@
     "use strict";
 
     const API_URL = "messageboard.php";
+    const API_AUTH = "mowgli_dash";
     const CLASS_ANIMATE = "animate";
+    const CLASS_HIDDEN = "hidden";
     const CLASS_MESSAGE = "message";
 
     window.addEventListener("load", init);
@@ -20,11 +22,13 @@
         qs("header").classList.add(CLASS_ANIMATE);
         qs("footer").classList.add(CLASS_ANIMATE);
         qsa("body > section").forEach(ele => ele.classList.add(CLASS_ANIMATE));
+        id("btn-post").addEventListener("click", postMessage);
 
         fetch(API_URL)
             .then(checkStatus)
             .then(JSON.parse)
-            .then(populateMessages);
+            .then(populateMessages)
+            .catch (() => addMessage("Sorry, there was an error... reload?"));
     }
 
     /**
@@ -41,8 +45,9 @@
      * DOM node.
      *
      * @param {string} message - The message to add
+     * @param {number} [delay=2000] - An optional delay in ms for the element to animate in
      */
-    function addMessage(message) {
+    function addMessage(message, delay=2000) {
         let ele = document.createElement("section");
         ele.classList.add(CLASS_MESSAGE);
         ele.innerText = message;
@@ -51,7 +56,36 @@
         // the original value of this is set in the css - 0.0
         ele.style.transform = "rotate(" + rotate + "deg) scale(var(--grow))";
         qs("main").appendChild(ele);
-        setTimeout(() => ele.style.setProperty("--grow", 1), 2000);
+        setTimeout(() => ele.style.setProperty("--grow", 1), delay);
+    }
+
+    /**
+     * Sends the given message to the server. Clears the textbox once it has been sent. Also adds
+     * the message to the page. Expects to be called from a click listener on a button.
+     *
+     * @param {MouseEvent} event - The click event from the event listener.
+     */
+    function postMessage(event) {
+        let msg = id("in-msg").value;
+        if (msg.length > 0) {
+            event.preventDefault();
+            let options = {
+                method: "POST",
+                headers: { "Content-type": "application/x-www-form-urlencoded" },
+                body: `message=${msg}&auth=${API_AUTH}`
+            };
+            fetch(API_URL, options)
+                .then(checkStatus)
+                .then(() => addMessage(msg, 0))
+                .then(() => id("in-msg").value = "")
+                .then(() => {
+                    let error = id("fetch-error");
+                    if (!error.classList.contains(CLASS_HIDDEN)) {
+                        error.classList.add(CLASS_HIDDEN);
+                    }
+                })
+                .catch(() => id("fetch-error").classList.remove(CLASS_HIDDEN));
+        }
     }
 
     /* CSE 154 HELPER FUNCTIONS */

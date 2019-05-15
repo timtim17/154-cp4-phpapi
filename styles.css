@@ -35,7 +35,7 @@ header.animate, footer.animate, body > section.animate {
     opacity: 1;
 }
 
-header, footer {
+header, footer, #add-msg {
     text-align: center;
 }
 
@@ -118,6 +118,18 @@ pre, .code {
 .message:hover {
     /* !important to override the javascript given .style */
     transform: rotate(0deg) scale(1.2) !important;
+}
+
+.hidden {
+    display: none;
+}
+
+#in-msg {
+    width: 40vw;
+}
+
+#fetch-error {
+    color: red;
 }
 
 #api-header {

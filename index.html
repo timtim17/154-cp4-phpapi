@@ -22,6 +22,19 @@
 
         <main><!-- messages added dynamically by js --></main>
 
+        <section id="add-msg">
+            <form>
+                <label>
+                    Post a Message!
+                    <input type="text" required id="in-msg">
+                </label>
+                <button id="btn-post">Post!</button>
+            </form>
+            <span id="fetch-error" class="hidden">
+                There was an error sending the message... Try again?
+            </span>
+        </section>
+
         <section id="api-header">
             <h2>API Doc</h2>
         </section>
