@@ -36,7 +36,8 @@ None
 **Returned Data Format**: JSON
 
 **Description:**
-Takes a message via POST and adds it to the message board. Parameters must be sent within the body
+Takes a message via POST and adds it to the message board. Responds with the index at which the
+message was addded, useful for the GET at index endpoint. Parameters must be sent within the body
 of the request as form-data. Requires authentication: a valid API key/password must be provided
 within the `auth` parameter.
 
@@ -52,10 +53,34 @@ within the `auth` parameter.
 **Example Response:**
 ```json
 {
-    "status": 200
+    "status": 200,
+    "index": 3
 }
 ```
 
 **Error Handling:**
 Responds with HTTP 400 if the auth key is incorrect, if the message is too short, or if either of
 those parameters are missing.
+
+## [GET] /messageboard.php?index
+**Request Format:** /messageboard.php?index=[number]
+
+**Request Type:** GET
+
+**Returned Data Format**: JSON
+
+**Description:**
+Responds with the message on the board at the given index.
+
+**Example Request:** /messageboard.php?index=0
+
+**Example Response:**
+```json
+{
+    "message": "Mowgli <3 Debug Duck"
+}
+```
+
+**Error Handling:**
+Responds with HTTP 400 if the index is out of bounds, either less than zero or higher than the
+number of messages available.

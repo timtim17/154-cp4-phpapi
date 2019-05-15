@@ -19,7 +19,17 @@
     $messages = json_decode(file_get_contents($FILE_NAME));
     
     if ($_SERVER['REQUEST_METHOD'] === "GET") {
-        echo json_encode($messages);
+        if (isset($_GET["index"])) {
+            $idx = (int) $_GET["index"];
+            if ($idx < 0 || $idx >= count($messages)) {
+                error("Invalid parameter index: Index {$idx} out of bounds.");
+            } else {
+                echo json_encode(array("message" => $messages[$idx]));
+            }
+        } else {
+            echo json_encode($messages);
+        }
+
     } else if ($_SERVER['REQUEST_METHOD'] === "POST") {
         /* Fake auth: in a real scenario this would be some sort of authentication, probably
         based on API key. For simplicity's sake this is just going to be a fake key or
@@ -31,7 +41,7 @@
                     if (strlen($msg) > 0) {
                         array_push($messages, $msg);
                         file_put_contents($FILE_NAME, json_encode($messages));
-                        echo json_encode(array("status" => 200));
+                        echo json_encode(array("status" => 200, "index" => count($messages) - 1));
                     } else {
                         error("Invalid parameter message: Message too short.");
                     }
