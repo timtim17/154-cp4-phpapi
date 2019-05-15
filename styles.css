@@ -55,7 +55,6 @@ h2 {
 
 main {
     align-items: flex-start;
-    height: 75vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
