@@ -60,8 +60,9 @@
             <h3><span class="ajax-type ajax-post">POST</span> /messageboard.php</h3>
             <strong>Response Type:</strong> JSON
             <p>
-                    Takes a message via POST and adds it to the message board. Parameters must
-                    be sent within the body of the request as form-data. Requires
+                    Takes a message via POST and adds it to the message board. Responds with the
+                    index at which the message was addded, useful for the GET at index endpoint.
+                    Parameters must be sent within the body of the request as form-data. Requires
                     authentication: a valid API key/password must be provided within the
                     <span class="code">auth</span> parameter.
             </p>
