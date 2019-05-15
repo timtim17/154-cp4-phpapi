@@ -19,7 +19,7 @@
     function init() {
         qs("header").classList.add(CLASS_ANIMATE);
         qs("footer").classList.add(CLASS_ANIMATE);
-        id("api-docs").classList.add(CLASS_ANIMATE);
+        qsa("body > section").forEach(ele => ele.classList.add(CLASS_ANIMATE));
 
         fetch(API_URL)
             .then(checkStatus)

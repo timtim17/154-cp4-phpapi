@@ -120,3 +120,12 @@ pre, .code {
     /* !important to override the javascript given .style */
     transform: rotate(0deg) scale(1.2) !important;
 }
+
+#api-header {
+    /* PHP icon under CC-BY 3.0 by Samat Odedara
+    https://www.iconfinder.com/icons/682678/code_coding_html_php_program_programming_script_icon */
+    background-image: url("img/php.svg");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: contain
+}
