@@ -9,14 +9,14 @@
 
     header("Content-Type: application/json");
 
-    $AUTH_KEY = "mowgli_dash";
-    $FILE_NAME = "messages.json";
+    define("AUTH_KEY", "mowgli_dash");
+    define("FILE_NAME", "messages.json");
 
-    if (!file_exists($FILE_NAME)) {
-        file_put_contents($FILE_NAME, "[]");
+    if (!file_exists(FILE_NAME)) {
+        file_put_contents(FILE_NAME, "[]");
     }
 
-    $messages = json_decode(file_get_contents($FILE_NAME));
+    $messages = json_decode(file_get_contents(FILE_NAME));
     
     if ($_SERVER['REQUEST_METHOD'] === "GET") {
         if (isset($_GET["index"])) {
@@ -34,12 +34,12 @@
         based on API key. For simplicity's sake this is just going to be a fake key or
         password that every response will need to provide. */
         if (isset($_POST["auth"])) {
-            if ($_POST["auth"] === $AUTH_KEY) {
+            if ($_POST["auth"] === AUTH_KEY) {
                 if (isset($_POST["message"])) {
                     $msg = $_POST["message"];
                     if (strlen($msg) > 0) {
                         array_push($messages, $msg);
-                        file_put_contents($FILE_NAME, json_encode($messages));
+                        file_put_contents(FILE_NAME, json_encode($messages));
                         echo json_encode(array("status" => 200, "index" => count($messages) - 1));
                     } else {
                         error("Invalid parameter message: Message too short.");
