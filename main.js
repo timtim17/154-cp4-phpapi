@@ -74,12 +74,13 @@
      */
     function postMessage(event) {
         let msg = id("in-msg").value;
-        if (msg.length > 0) {
+        if (msg.length > 0) {   // don't prevent default before form validation
             event.preventDefault();
+            let formData = new FormData(qs("form"));
+            formData.append("auth", API_AUTH);
             let options = {
                 method: "POST",
-                headers: { "Content-type": "application/x-www-form-urlencoded" },
-                body: `message=${msg}&auth=${API_AUTH}`
+                body: formData
             };
             fetch(API_URL, options)
                 .then(checkStatus)
