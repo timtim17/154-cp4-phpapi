@@ -37,7 +37,9 @@
      * @param {object} data - The response from the API
      */
     function populateMessages(data) {
-        data.forEach(msg => addMessage(msg));
+        for (let i = 0; i < data.length; i++) {
+            addMessage(data[i], i);
+        }
     }
 
     /**
@@ -45,10 +47,13 @@
      * DOM node.
      *
      * @param {string} message - The message to add
+     * @param {number} index - The index of the message in the server
      * @param {number} [delay=2000] - An optional delay in ms for the element to animate in; by
      *                                  default the messages animate in after a 2 second delay
      */
-    function addMessage(message, delay=2000) {
+    function addMessage(message, index, delay=2000) {
+        let anchorParent = document.createElement("a");
+        anchorParent.href = "specific.html?index=" + index;
         let ele = document.createElement("section");
         ele.classList.add(CLASS_MESSAGE);
         ele.innerText = message;
@@ -56,7 +61,8 @@
         // animate the scaling of the element by setting a custom css property after a timeout
         // the original value of this is set in the css - 0.0
         ele.style.transform = "rotate(" + rotate + "deg) scale(var(--grow))";
-        qs("main").appendChild(ele);
+        anchorParent.appendChild(ele);
+        qs("main").appendChild(anchorParent);
         setTimeout(() => ele.style.setProperty("--grow", 1), delay);
     }
 
@@ -77,7 +83,8 @@
             };
             fetch(API_URL, options)
                 .then(checkStatus)
-                .then(() => addMessage(msg, 0))
+                .then(JSON.parse)
+                .then(data => addMessage(msg, data.index, 0))
                 .then(() => id("in-msg").value = "")
                 .then(() => {
                     let error = id("fetch-error");
