@@ -17,9 +17,9 @@
      * GET /messageboard.php?index=#
      *  Required Parameters:
      *      - index=a valid message index (0 <= index < count(messages))
-     *  Output Format: JSON
+     *  Output Format: Plain Text
      *  Output Details:
-     *      - Responds with a JSON object containing the requested message at the key "message"
+     *      - Responds with the message in plain text
      *      - Responds with HTTP 400 if the index is out of bounds.
      *          - Can result in unexpected behavior if the index is non-numeric
      * POST /messageboard.php
@@ -41,8 +41,6 @@
      *          is too short (length < 1) or is missing.
      */
 
-    header("Content-Type: application/json");
-
     define("AUTH_KEY", "mowgli_dash");
     define("FILE_NAME", "messages.json");
 
@@ -58,9 +56,11 @@
             if ($idx < 0 || $idx >= count($messages)) {
                 error("Invalid parameter index: Index {$idx} out of bounds.");
             } else {
-                echo json_encode(array("message" => $messages[$idx]));
+                header("Content-Type: text/plain");
+                echo $messages[$idx];
             }
         } else {
+            header("Content-Type: application/json");
             echo json_encode($messages);
         }
     } else if ($_SERVER['REQUEST_METHOD'] === "POST") {
@@ -74,6 +74,7 @@
                     if (strlen($msg) > 0) {
                         array_push($messages, $msg);
                         file_put_contents(FILE_NAME, json_encode($messages));
+                        header("Content-Type: application/json");
                         echo json_encode(array("status" => 200, "index" => count($messages) - 1));
                     } else {
                         error("Invalid parameter message: Message too short.");

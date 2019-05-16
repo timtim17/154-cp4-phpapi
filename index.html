@@ -50,7 +50,7 @@
             <h4>Example Request</h4>
             <pre><code>GET /messageboard.php</code></pre>
             <h4>Example Response</h4>
-<pre><code>[
+            <pre><code>[
     "Mowgli &lt;3 Debug Duck",
     "CSE 154 is awesome!"
 ]</code></pre><!-- break indentation for pre-formatted block -->
@@ -89,7 +89,7 @@
             <pre><code>POST /messageboard.php</code></pre>
             <p>(with above form data)</p>
             <h4>Example Response</h4>
-<pre><code>{
+            <pre><code>{
     "status": 200,
     "index": 3
 }</code></pre>
@@ -97,7 +97,7 @@
 
         <section>
             <h3><span class="ajax-type ajax-get">GET</span> /messageboard.php?index</h3>
-            <strong>Response Type:</strong> JSON
+            <strong>Response Type:</strong> Plain Text
             <p>
                 Responds with the message on the board at the given index.
             </p>
@@ -108,9 +108,7 @@
             <h4>Example Request</h4>
             <pre><code>GET /messageboard.php?index=0</code></pre>
             <h4>Example Response</h4>
-<pre><code>{
-    "message": "Mowgli &lt;3 Debug Duck"
-}</code></pre>
+            <pre><code>Mowgli &lt;3 Debug Duck</code></pre>
         </section>
 
         <footer>

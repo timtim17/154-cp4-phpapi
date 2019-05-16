@@ -24,8 +24,7 @@
         if (url.searchParams.has(URL_PARAM)) {
             fetch(API_URL + "?index=" + url.searchParams.get(URL_PARAM))
                 .then(checkStatus)
-                .then(JSON.parse)
-                .then(data => setMessage(data.message))
+                .then(message => setMessage(message))
                 .catch(() => setMessage("There was an error getting the message... reload?"));
         } else {
             setMessage("Somehow you got here in an invalid way... try again?"

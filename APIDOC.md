@@ -67,7 +67,7 @@ those parameters are missing.
 
 **Request Type:** GET
 
-**Returned Data Format**: JSON
+**Returned Data Format**: Plain Text
 
 **Description:**
 Responds with the message on the board at the given index.
@@ -75,10 +75,8 @@ Responds with the message on the board at the given index.
 **Example Request:** /messageboard.php?index=0
 
 **Example Response:**
-```json
-{
-    "message": "Mowgli <3 Debug Duck"
-}
+```
+Mowgli <3 Debug Duck
 ```
 
 **Error Handling:**
