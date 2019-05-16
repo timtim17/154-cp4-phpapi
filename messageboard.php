@@ -60,8 +60,7 @@
                 echo $messages[$idx];
             }
         } else {
-            header("Content-Type: application/json");
-            echo json_encode($messages);
+            output_json($messages);
         }
     } else if ($_SERVER['REQUEST_METHOD'] === "POST") {
         /* Fake auth: in a real scenario this would be some sort of authentication, probably
@@ -74,8 +73,7 @@
                     if (strlen($msg) > 0) {
                         array_push($messages, $msg);
                         file_put_contents(FILE_NAME, json_encode($messages));
-                        header("Content-Type: application/json");
-                        echo json_encode(array("status" => 200, "index" => count($messages) - 1));
+                        output_json(array("status" => 200, "index" => count($messages) - 1));
                     } else {
                         error("Invalid parameter message: Message too short.");
                     }
@@ -90,6 +88,16 @@
         }
     } else {
         error("Invalid request method: Please use either GET or POST with the correct parameters.");
+    }
+
+    /**
+     * Outputs the given array as a JSON response. Sets the header's Content-Type as well.
+     *
+     * @param array $array the array to convert to JSON and output
+     */
+    function output_json($array) {
+        header("Content-Type: application/json");
+        echo json_encode($array);
     }
 
     /**
