@@ -115,6 +115,7 @@ pre, .code {
     font-family: "Gloria Hallelujah", cursive;
     margin: 32px;
     min-height: 200px;
+    overflow-wrap: break-word;
     padding: 16px;
     transition: transform 500ms ease;
     width: 200px;
