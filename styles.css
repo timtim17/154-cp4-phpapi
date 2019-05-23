@@ -1,0 +1,148 @@
+/*
+    Austin Jenchi
+    CSE 154 19sp AQ
+    05/14/2019
+    Styles for the message board. Sets the background of the board using images and adds some other
+    decorative elements. Adds styles to make elements look like paper with pushpins. Has CSS
+    animations triggered by Javascript on page load using the animate class.
+*/
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Kodchasan|Source+Code+Pro');
+
+body {
+    /* Corkboard image under CC0 public domain by Petr Kratochvil
+    https://www.publicdomainpictures.net/en/view-image.php?image=25664&picture=cork-board */
+    background-image: url("img/cork-board.jpg");
+    background-repeat: repeat;
+    font-family: Kodchasan, sans-serif;
+    margin: 0;
+}
+
+header, footer, body > section {
+    background-color: #ffffff;
+    border-radius: 4px;
+    /* box-shadow based on Google's Material Web Components Cards
+       https://material.io/develop/web/components/cards/ */
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14),
+        0 1px 3px 0 rgba(0,0,0,.12);
+    margin: 8px auto;
+    opacity: 0;
+    padding: 8px;
+    transition: transform 2s ease, opacity 2s ease;
+}
+
+header.animate, footer.animate, body > section.animate {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+header, footer, #add-msg {
+    text-align: center;
+}
+
+header {
+    transform: translateY(-100vh);
+    width: 40vw;
+}
+
+footer, body > section {
+    transform: translateY(100vh);
+    width: 80vw;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+main {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+thead tr td {
+    border-bottom: 2px solid black;
+}
+
+td:first-child {
+    border-right: 2px solid black;
+}
+
+pre, .code {
+    background: #e0e0e0;
+    border: solid 1px #999999;
+    border-radius: 4px;
+    color: #ad0000;
+    font-family: "Source Code Pro", monospace;
+    padding: 4px;
+    width: 40vw;
+}
+
+.code {
+    padding: 2px;
+    margin: 0;
+}
+
+.ajax-type {
+    border-radius: 2px;
+    padding: 0 2px;
+}
+
+.ajax-get {
+    background-color: orange;
+    color: #000000;
+}
+
+.ajax-post {
+    background-color: green;
+    color: #eeeeee;
+}
+
+.message {
+    /* css custom property to separately animate scale */
+    --grow: 0;
+    background-color: #ffff88;
+    box-shadow: 0px 10px 7px 0px #000000c4;
+    font-family: "Gloria Hallelujah", cursive;
+    margin: 32px;
+    min-height: 200px;
+    overflow-wrap: break-word;
+    padding: 16px;
+    transition: transform 500ms ease;
+    width: 200px;
+}
+
+.message:hover {
+    /* !important to override the javascript given .style */
+    transform: rotate(0deg) scale(1.2) !important;
+}
+
+.hidden {
+    display: none;
+}
+
+#in-msg {
+    width: 40vw;
+}
+
+#fetch-error {
+    color: red;
+}
+
+#api-header {
+    /* PHP icon under CC-BY 3.0 by Samat Odedara
+    https://www.iconfinder.com/icons/682678/code_coding_html_php_program_programming_script_icon */
+    background-image: url("img/php.svg");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: contain
+}

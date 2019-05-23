@@ -1,0 +1,28 @@
+/*
+    Austin Jenchi
+    CSE 154 19sp AQ
+    05/14/2019
+    Styles specific to the specific quote page. Expects the main styles to be loaded for things like
+    background image and font loading.
+*/
+
+body {
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    width: 100vw;
+}
+
+main {
+    background-color: #ffff88;
+    box-shadow: 0px 10px 7px 0px #000000c4;
+    font-family: "Gloria Hallelujah", cursive;
+    font-size: 3em;
+    height: 80vh;
+    overflow-y: scroll;
+    padding: 16px;
+    transform: rotate(0deg) scale(0);
+    transition: transform 3s ease;
+    width: 80vh;
+}

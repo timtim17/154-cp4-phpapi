@@ -1,0 +1,120 @@
+<!doctype html>
+
+<!--
+    Austin Jenchi
+    CSE 154 19sp AQ
+    05/14/2019
+    Basic HTML to act as part message board implementation, where a script fetches messages from the
+    backend and shows them on the page, and part API doc.
+-->
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Message Board</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="main.js"></script>
+    </head>
+
+    <body>
+        <header>
+                <h1>CP4 Message Board</h1>
+        </header>
+
+        <main><!-- messages added dynamically by js --></main>
+
+        <section id="add-msg">
+            <form>
+                <label>
+                    Post a Message!
+                    <input type="text" required id="in-msg" name="message">
+                </label>
+                <button id="btn-post">Post!</button>
+            </form>
+            <span id="fetch-error" class="hidden">
+                There was an error sending the message... Try again?
+            </span>
+        </section>
+
+        <section id="api-header">
+            <h2>API Doc</h2>
+        </section>
+
+        <section>
+            <h3><span class="ajax-type ajax-get">GET</span> /messageboard.php</h3>
+            <strong>Response Type:</strong> JSON
+            <p>
+                Responds with an array of every message on the message board. If there are no
+                messages, an empty array is sent back.
+            </p>
+            <strong>Required Parameters:</strong> None
+            <h4>Example Request</h4>
+            <pre><code>GET /messageboard.php</code></pre>
+            <h4>Example Response</h4>
+            <pre><code>[
+    "Mowgli &lt;3 Debug Duck",
+    "CSE 154 is awesome!"
+]</code></pre><!-- break indentation for pre-formatted block -->
+        </section>
+
+        <section>
+            <h3><span class="ajax-type ajax-post">POST</span> /messageboard.php</h3>
+            <strong>Response Type:</strong> JSON
+            <p>
+                    Takes a message via POST and adds it to the message board. Responds with the
+                    index at which the message was addded, useful for the GET at index endpoint.
+                    Parameters must be sent within the body of the request as form-data. Requires
+                    authentication: a valid API key/password must be provided within the
+                    <span class="code">auth</span> parameter.
+            </p>
+            <strong>Required Parameters:</strong> Form Data
+            <table>
+                <thead>
+                    <tr>
+                        <td>Parameter Name</td>
+                        <td>Value</td>
+                    </tr>
+                </thead>
+                
+                <tr>
+                    <td>message</td>
+                    <td>Mowgli loves CSE 154!</td>
+                </tr>
+
+                <tr>
+                    <td>auth</td>
+                    <td>mowgli_dash</td>
+                </tr>
+            </table>
+            <h4>Example Request</h4>
+            <pre><code>POST /messageboard.php</code></pre>
+            <p>(with above form data)</p>
+            <h4>Example Response</h4>
+            <pre><code>{
+    "status": 200,
+    "index": 3
+}</code></pre>
+        </section>
+
+        <section>
+            <h3><span class="ajax-type ajax-get">GET</span> /messageboard.php?index</h3>
+            <strong>Response Type:</strong> Plain Text
+            <p>
+                Responds with the message on the board at the given index.
+            </p>
+            <strong>Required Parameters:</strong>
+            <span class="code">index</span> - The index of the message to get, 0 &lt;=
+                <span class="code">index</span> &lt;
+                <span class="code">number of messages</span>
+            <h4>Example Request</h4>
+            <pre><code>GET /messageboard.php?index=0</code></pre>
+            <h4>Example Response</h4>
+            <pre><code>Mowgli &lt;3 Debug Duck</code></pre>
+        </section>
+
+        <footer>
+            <p>Portions of this page &copy; 2019 Austin Jenchi</p>
+            <p>Other attributions cited in page source</p>
+            <p>Messages are user generated, no responsibility is taken for their contents.</p>
+        </footer>
+    </body>
+</html>
